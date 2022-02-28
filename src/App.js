@@ -18,6 +18,7 @@ import ProfileSettings from './components/auth/ProfileSettings'
 import Pets from './components/pets/Pets'
 import Home from './components/Home'
 import Contact from './components/Contact'
+import { url } from './config'
 
 function App () {
   const navigate = useNavigate()
@@ -41,7 +42,7 @@ function App () {
         setIsLoading(true)
         setIsSearching(false)
         const res = await axios.get(
-          `http://localhost:8000/pet/?adoptionStatus=${searcher.adoptionStatus}&petType=${searcher.petType}&minHeight=${searcher.minHeight}&maxHeight=${searcher.maxHeight}&minWeight=${searcher.minWeight}&maxWeight=${searcher.maxWeight}&petName=${searcher.petName}`,
+          `${url}/pet/?adoptionStatus=${searcher.adoptionStatus}&petType=${searcher.petType}&minHeight=${searcher.minHeight}&maxHeight=${searcher.maxHeight}&minWeight=${searcher.minWeight}&maxWeight=${searcher.maxWeight}&petName=${searcher.petName}`,
           { withCredentials: true }
         )
         setPetsArray(res.data)
@@ -157,7 +158,7 @@ function App () {
       try {
         const cookie = Cookies.get('token')
         if (cookie) {
-          const res = await axios.get('http://localhost:8000/user', {
+          const res = await axios.get(`${url}/user`, {
             withCredentials: true
           })
           setCurrentUser(res.data.user)

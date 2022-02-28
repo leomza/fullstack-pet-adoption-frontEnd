@@ -5,6 +5,7 @@ import axios from 'axios'
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { url } from '../../config'
 
 const ProfileSettings = () => {
   const { currentUser, setCurrentUser } = useContext(AuthContext)
@@ -68,7 +69,7 @@ const ProfileSettings = () => {
     try {
       e.preventDefault()
       const res = await axios.put(
-        `http://localhost:8000/user/${currentUser._id}`,
+        `${url}/user/${currentUser._id}`,
         user,
         { withCredentials: true }
       )

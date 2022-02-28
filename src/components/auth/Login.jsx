@@ -5,6 +5,7 @@ import AuthContext from '../../context/AuthContext'
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { url } from '../../config'
 
 const Login = ({ changeModal, handleClose }) => {
   //State to login
@@ -36,7 +37,7 @@ const Login = ({ changeModal, handleClose }) => {
     try {
       e.preventDefault()
       //Validate no empties fields
-      const res = await axios.post('http://localhost:8000/login', user, {
+      const res = await axios.post(`${url}/login`, user, {
         withCredentials: true
       })
       setCurrentUser(res.data.user)

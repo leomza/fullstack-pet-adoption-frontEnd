@@ -5,6 +5,7 @@ import AuthContext from '../../context/AuthContext'
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { url } from '../../config'
 
 const NewAccount = ({ changeModal, handleClose }) => {
   //Use the function "login" from authContext
@@ -54,7 +55,7 @@ const NewAccount = ({ changeModal, handleClose }) => {
     try {
       e.preventDefault()
       //Validate no empties fields
-      const res = await axios.post('http://localhost:8000/signup', user, {
+      const res = await axios.post(`${url}/signup`, user, {
         withCredentials: true
       })
       setCurrentUser(res.data.user)

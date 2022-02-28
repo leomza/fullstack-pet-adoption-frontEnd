@@ -3,6 +3,7 @@ import axios from 'axios'
 import PetCard from '../pets/PetCard'
 import { Modal } from 'react-bootstrap'
 import swal from 'sweetalert'
+import { url } from '../../config'
 
 const UserTable = ({ user }) => {
   const [containPet, setContainPet] = useState(false)
@@ -25,7 +26,7 @@ const UserTable = ({ user }) => {
     async function searchUserPets () {
       try {
         const res = await axios.get(
-          `http://localhost:8000/pet/user/${user._id}/owned`
+          `${url}/pet/user/${user._id}/owned`
         )
         setUserPets(res.data)
       } catch (error) {
@@ -38,7 +39,7 @@ const UserTable = ({ user }) => {
   const changeUserRole = async userRole => {
     try {
       const res = await axios.put(
-        `http://localhost:8000/user/${user._id}/changeRole`,
+        `${url}/user/${user._id}/changeRole`,
         { userRole }
       )
       swal('Guauuuuu', res.data.message, 'success')

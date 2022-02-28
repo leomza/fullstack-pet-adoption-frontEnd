@@ -4,6 +4,7 @@ import { Table } from 'react-bootstrap'
 import UserTable from './UserTable'
 import loadingDog from '../../assets/loadingDog.gif'
 import AuthContext from '../../context/AuthContext'
+import { url } from '../../config'
 
 const Dashboard = () => {
   const [allUsers, setAllUsers] = useState([])
@@ -16,7 +17,7 @@ const Dashboard = () => {
       try {
         if (currentUser) {
           const res = await axios.get(
-            `http://localhost:8000/user/all/${currentUser._id}`,
+            `${url}/user/all/${currentUser._id}`,
             { withCredentials: true }
           )
           setAllUsers(res.data.allUsers)

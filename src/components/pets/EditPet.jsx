@@ -1,29 +1,32 @@
-import { useState, createRef, useEffect, useContext } from 'react'
+import { useState, useContext, createRef, useEffect } from 'react'
 import axios from 'axios'
-import { Form, Col, Image, Button } from 'react-bootstrap'
 import PetContext from '../../context/PetContext'
 import AuthContext from '../../context/AuthContext'
+import { Form, Col, Image, Button } from 'react-bootstrap'
+import { url } from '../../config'
 
-const AddPet = ({ handleClose }) => {
+const EditPet = ({ pet, handleClose }) => {
   const { setPetsArray } = useContext(PetContext)
   const { currentUser } = useContext(AuthContext)
   const fileInputRef = createRef()
-  const [newPet, setNewPet] = useState({
-    petType: '',
-    petName: '',
-    adoptionStatus: 'available',
-    picture: '',
-    height: '',
-    weight: '',
-    color: '',
-    bio: '',
-    hypoallergenic: '',
-    dietaryRestrictions: '',
-    breed: ''
+
+  //State to NewAccount
+  const [editPet, setEditPet] = useState({
+    petType: pet.petType,
+    petName: pet.petName,
+    adoptionStatus: pet.adoptionStatus,
+    picture: pet.picture,
+    height: pet.height,
+    weight: pet.weight,
+    color: pet.color,
+    bio: pet.bio,
+    hypoallergenic: pet.hypoallergenic,
+    dietaryRestrictions: pet.dietaryRestrictions,
+    breed: pet.breed
   })
   const [petPicturePreview, setPetPicturePreview] = useState()
   const [petPicturePreviewURL, setPetPicturePreviewURL] = useState(
-    `http://localhost:8000/images/generalPet.jpg`
+    `${url}/images/${pet.picture}`
   )
 
   const {
@@ -35,12 +38,12 @@ const AddPet = ({ handleClose }) => {
     hypoallergenic,
     dietaryRestrictions,
     breed
-  } = newPet
+  } = editPet
 
   const onChange = e => {
     try {
-      setNewPet({
-        ...newPet,
+      setEditPet({
+        ...editPet,
         [e.target.name]: e.target.value
       })
     } catch (error) {
@@ -51,8 +54,8 @@ const AddPet = ({ handleClose }) => {
   //To set the value of the numbers
   const onChangeNumber = e => {
     try {
-      setNewPet({
-        ...newPet,
+      setEditPet({
+        ...editPet,
         [e.target.name]: e.target.valueAsNumber
       })
     } catch (error) {
@@ -63,8 +66,8 @@ const AddPet = ({ handleClose }) => {
   //To set the value of the checked input
   const onChangeChecked = e => {
     try {
-      setNewPet({
-        ...newPet,
+      setEditPet({
+        ...editPet,
         [e.target.name]: e.target.checked
       })
     } catch (error) {
@@ -78,8 +81,8 @@ const AddPet = ({ handleClose }) => {
       const file = e.target.files[0]
       if (file && file.type.substr(0, 5) === 'image') {
         setPetPicturePreview(file)
-        setNewPet({
-          ...newPet,
+        setEditPet({
+          ...editPet,
           picture: file
         })
       }
@@ -88,25 +91,26 @@ const AddPet = ({ handleClose }) => {
     }
   }
 
+  //When the user wants to NewAccount
   const onSubmit = async e => {
     try {
       e.preventDefault()
 
       const fd = new FormData()
-      fd.append('petType', newPet.petType)
-      fd.append('petName', newPet.petName)
-      fd.append('adoptionStatus', newPet.adoptionStatus)
-      fd.append('height', newPet.height)
-      fd.append('weight', newPet.weight)
-      fd.append('color', newPet.color)
-      fd.append('bio', newPet.bio)
-      fd.append('hypoallergenic', newPet.hypoallergenic)
-      fd.append('dietaryRestrictions', newPet.dietaryRestrictions)
-      fd.append('breed', newPet.breed)
-      fd.append('picture', newPet.picture)
+      fd.append('petType', editPet.petType)
+      fd.append('petName', editPet.petName)
+      fd.append('adoptionStatus', editPet.adoptionStatus)
+      fd.append('height', editPet.height)
+      fd.append('weight', editPet.weight)
+      fd.append('color', editPet.color)
+      fd.append('bio', editPet.bio)
+      fd.append('hypoallergenic', editPet.hypoallergenic)
+      fd.append('dietaryRestrictions', editPet.dietaryRestrictions)
+      fd.append('breed', editPet.breed)
+      fd.append('picture', editPet.picture)
 
-      const res = await axios.post(
-        `http://localhost:8000/pet/${currentUser._id}`,
+      const res = await axios.put(
+        `${url}/pet/${pet._id}/${currentUser._id}`,
         fd
       )
       setPetsArray(res.data)
@@ -138,7 +142,6 @@ const AddPet = ({ handleClose }) => {
           name='petName'
           id='petName'
           autoComplete='off'
-          placeholder='The pet name...'
         />
       </Form.Group>
 
@@ -151,6 +154,7 @@ const AddPet = ({ handleClose }) => {
             onChange={onChange}
             name='petType'
             id='petType'
+            checked={editPet.petType === 'dog' ? 'checked' : null}
           />
           <Form.Label htmlFor='petType'>Cat</Form.Label>
           <Form.Check
@@ -159,6 +163,39 @@ const AddPet = ({ handleClose }) => {
             onChange={onChange}
             name='petType'
             id='petType'
+            checked={editPet.petType === 'cat' ? 'checked' : null}
+          />
+        </div>
+      </Form.Group>
+
+      <Form.Group as={Col}>
+        <div className='d-flex'>
+          <Form.Label htmlFor='adoptionStatus'>Adopted</Form.Label>
+          <Form.Check
+            type='radio'
+            value='adopted'
+            onChange={onChange}
+            name='adoptionStatus'
+            id='adoptionStatus'
+            checked={editPet.adoptionStatus === 'adopted' ? 'checked' : null}
+          />
+          <Form.Label htmlFor='adoptionStatus'>Fostered</Form.Label>
+          <Form.Check
+            type='radio'
+            value='fostered'
+            onChange={onChange}
+            name='adoptionStatus'
+            id='adoptionStatus'
+            checked={editPet.adoptionStatus === 'fostered' ? 'checked' : null}
+          />
+          <Form.Label htmlFor='adoptionStatus'>Available</Form.Label>
+          <Form.Check
+            type='radio'
+            value='available'
+            onChange={onChange}
+            name='adoptionStatus'
+            id='adoptionStatus'
+            checked={editPet.adoptionStatus === 'available' ? 'checked' : null}
           />
         </div>
       </Form.Group>
@@ -175,7 +212,6 @@ const AddPet = ({ handleClose }) => {
           autoComplete='off'
           min='0.5'
           step='0.1'
-          placeholder='The pet height...'
         />
       </Form.Group>
 
@@ -191,7 +227,6 @@ const AddPet = ({ handleClose }) => {
           autoComplete='off'
           min='0.5'
           step='0.1'
-          placeholder='The pet weight...'
         />
       </Form.Group>
 
@@ -205,7 +240,6 @@ const AddPet = ({ handleClose }) => {
           name='color'
           id='color'
           autoComplete='off'
-          placeholder='The pet color...'
         />
       </Form.Group>
 
@@ -219,7 +253,6 @@ const AddPet = ({ handleClose }) => {
           name='bio'
           id='bio'
           autoComplete='off'
-          placeholder='The pet biography...'
         />
       </Form.Group>
 
@@ -246,20 +279,19 @@ const AddPet = ({ handleClose }) => {
           name='dietaryRestrictions'
           id='dietaryRestrictions'
           autoComplete='off'
-          placeholder='The pet dietary restrictions...'
         />
       </Form.Group>
 
       <Form.Group as={Col}>
         <Form.Label htmlFor='breed'>Breed</Form.Label>
         <Form.Control
+          className='w-100'
           type='text'
           value={breed}
           onChange={onChange}
           name='breed'
           id='breed'
           autoComplete='off'
-          placeholder='The pet breed...'
         />
       </Form.Group>
 
@@ -279,7 +311,7 @@ const AddPet = ({ handleClose }) => {
         <Image
           className='w-25'
           src={petPicturePreviewURL}
-          alt='Preview Image'
+          alt=''
           roundedCircle
         />
       </div>
@@ -293,4 +325,4 @@ const AddPet = ({ handleClose }) => {
   )
 }
 
-export default AddPet
+export default EditPet

@@ -9,6 +9,7 @@ import AuthContext from '../../context/AuthContext'
 import PetContext from '../../context/PetContext'
 import swal from 'sweetalert'
 import backgroundDog from '../../assets/backgroundDog.jpg'
+import { url } from '../../config'
 
 const PetCard = ({ pet }) => {
   const {
@@ -72,7 +73,7 @@ const PetCard = ({ pet }) => {
         dangerMode: true
       }).then(positive => {
         if (positive) {
-          const res = axios.delete(`http://localhost:8000/pet/${pet._id}`, {
+          const res = axios.delete(`${url}/pet/${pet._id}`, {
             withCredentials: true
           })
           if (res) {
@@ -90,7 +91,7 @@ const PetCard = ({ pet }) => {
       e.preventDefault()
       const userId = currentUser._id
       const res = await axios.post(
-        `http://localhost:8000/pet/${pet._id}/save`,
+        `${url}/pet/${pet._id}/save`,
         { userId },
         { withCredentials: true }
       )
@@ -107,7 +108,7 @@ const PetCard = ({ pet }) => {
       e.preventDefault()
       const userId = currentUser._id
       const res = await axios.post(
-        `http://localhost:8000/pet/${pet._id}/unsave`,
+        `${url}/pet/${pet._id}/unsave`,
         { userId },
         { withCredentials: true }
       )
@@ -124,7 +125,7 @@ const PetCard = ({ pet }) => {
       e.preventDefault()
       const userId = currentUser._id
       const res = await axios.post(
-        `http://localhost:8000/pet/${pet._id}/adopt`,
+        `${url}/pet/${pet._id}/adopt`,
         { userId, adoptionStatus },
         { withCredentials: true }
       )
@@ -145,7 +146,7 @@ const PetCard = ({ pet }) => {
       e.preventDefault()
       const userId = currentUser._id
       const res = await axios.post(
-        `http://localhost:8000/pet/${pet._id}/return`,
+        `${url}/pet/${pet._id}/return`,
         { userId },
         { withCredentials: true }
       )
@@ -161,7 +162,7 @@ const PetCard = ({ pet }) => {
     <Card style={{ width: '18rem' }} className='m-4 pt-4'>
       <Card.Img
         variant='top'
-        src={`http://localhost:8000/images/${pet.picture}`}
+        src={`${url}/images/${pet.picture}`}
       />
       <Card.Body>
         <Card.Title className='text-capitalize'>{pet.petName}</Card.Title>

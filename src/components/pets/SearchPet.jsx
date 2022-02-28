@@ -5,6 +5,7 @@ import { Form, Col, Button } from 'react-bootstrap'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faDog, faCat } from '@fortawesome/free-solid-svg-icons'
+import { url } from '../../config'
 
 const SearchPet = () => {
   const { searcher, setSearcher, setPetsArray, setIsSearching } = useContext(
@@ -52,7 +53,7 @@ const SearchPet = () => {
         }
       }
       const res = await axios.get(
-        `http://localhost:8000/pet/?adoptionStatus=${searcher.adoptionStatus}&petType=${searcher.petType}&minHeight=${searcher.minHeight}&maxHeight=${searcher.maxHeight}&minWeight=${searcher.minWeight}&maxWeight=${searcher.maxWeight}&petName=${searcher.petName}`,
+        `${url}/pet/?adoptionStatus=${searcher.adoptionStatus}&petType=${searcher.petType}&minHeight=${searcher.minHeight}&maxHeight=${searcher.maxHeight}&minWeight=${searcher.minWeight}&maxWeight=${searcher.maxWeight}&petName=${searcher.petName}`,
         { withCredentials: true }
       )
       setPetsArray(res.data)

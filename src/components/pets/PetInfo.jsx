@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Card, Button } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import loadingDog from '../../assets/loadingDog.gif'
+import { url } from '../../config'
 
 const PetInfo = () => {
   const navigate = useNavigate()
@@ -13,7 +14,7 @@ const PetInfo = () => {
   useEffect(() => {
     async function searchPet () {
       try {
-        const res = await axios.get(`http://localhost:8000/pet/${petId}`)
+        const res = await axios.get(`${url}/pet/${petId}`)
         setFoundPet(res.data.pet)
         setIsLoading(false)
       } catch (error) {
@@ -35,7 +36,7 @@ const PetInfo = () => {
         <Card style={{ width: '18rem' }}>
           <Card.Img
             variant='top'
-            src={`http://localhost:8000/images/${foundPet.picture}`}
+            src={`${url}/images/${foundPet.picture}`}
           />
           <Card.Body>
             <Card.Title>Name: {foundPet.petName}</Card.Title>

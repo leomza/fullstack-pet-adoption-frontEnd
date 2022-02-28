@@ -12,6 +12,7 @@ import AuthContext from '../../context/AuthContext'
 import { Modal, Button, Row, Container } from 'react-bootstrap'
 import axios from 'axios'
 import backgroundDog from '../../assets/backgroundDog.jpg'
+import { url } from '../../config'
 
 const Pets = () => {
   const { petsArray, isLoading, setIsLoading, setIsSearching } = useContext(
@@ -34,7 +35,7 @@ const Pets = () => {
         setIsSearching(true)
         setTooglePets(false)
         const res = await axios.get(
-          `http://localhost:8000/pet/user/${currentUser._id}`
+          `${url}/pet/user/${currentUser._id}`
         )
         setSavedPets(res.data)
         setIsLoading(false)
@@ -53,7 +54,7 @@ const Pets = () => {
         setIsLoading(true)
         setTooglePets(false)
         const res = await axios.get(
-          `http://localhost:8000/pet/user/${currentUser._id}/owned`
+          `${url}/pet/user/${currentUser._id}/owned`
         )
         setSavedPets(res.data)
         setIsLoading(false)

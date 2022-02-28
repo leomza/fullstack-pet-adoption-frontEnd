@@ -1,0 +1,327 @@
+html {
+  background-color: #0E6CFF;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.button__form {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+/********************* Spinner ***********************************/
+.spinner__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+}
+
+.spinner__image {
+  width: 250px;
+  height: 250px;
+}
+
+/********************* NavBar ***********************************/
+a {
+  display: flex !important;
+  align-items: center !important;
+  color: grey !important;
+  text-decoration: none !important;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+a:hover {
+  color: white !important;
+}
+
+.navbar-brand {
+  padding-left: 25px;
+}
+
+.dropdown-item {
+  justify-content: center !important;
+}
+
+.dropdown {
+  display: flex;
+  padding-left: 25px;
+}
+
+#titleName {
+  position: relative;
+  left: 40%;
+  cursor: default;
+}
+
+#titleName:hover {
+  font-size: large;
+}
+
+.navBar__icon {
+  margin-left: 10px;
+}
+
+.navDropdown__profile {
+  text-align: center !important;
+}
+
+.navDropdown__profile:hover {
+  background: gainsboro;
+}
+
+/********************* Home ***********************************/
+.home__gif {
+  width: 100%;
+}
+
+.home__content {
+  position: fixed;
+}
+
+.carousel-item {
+  height: 500px !important;
+}
+
+.carousel__image {
+  width: fit-content;
+  height: fit-content;
+  padding-left: 50px;
+}
+
+.image--cat {
+  width: 500px;
+}
+
+.carousel-caption {
+  position: relative !important;
+  bottom: 65% !important;
+  width: 50% !important;
+  left: 42% !important;
+}
+
+.carousel__title {
+  width: 75%;
+}
+
+.carousel__subtitle {
+  width: 100%;
+}
+
+/********************* About Us ***********************************/
+.image--petWorking {
+  width: 500px;
+  height: 500px;
+}
+
+li {
+  list-style-type: none;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#aboutUsContainer {
+  bottom: 85% !important;
+}
+
+.image--team {
+  border-radius: 50%;
+  width: 400px;
+  height: 400px;
+  transform: rotate(-2deg);
+  margin-top: 50px;
+}
+
+.description__team {
+  margin-top: 25px;
+}
+
+.socialMedia__team--container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 35px;
+}
+
+/********************* Not Found ***********************************/
+.notFound__container {
+  height: 500px;
+}
+
+.notFound__image {
+  width: 1100px;
+}
+
+.notFound__title {
+  text-align: center;
+  padding-top: 25px;
+}
+
+.notFound__redirect {
+  color: black !important;
+}
+
+#iconHouse {
+  margin-left: 10px;
+}
+
+.notFound__button {
+  position: absolute;
+  left: 40%;
+}
+
+/********************* Pet Card ***********************************/
+.card-body {
+  text-align: center;
+}
+
+.card-img-top {
+  height: 225px !important;
+}
+
+/********************* Search Bar ***********************************/
+.form__search {
+  background-color: #0E6CFF;
+}
+
+.form-check-input:checked {
+  background-color: green !important;
+  border-color: green !important;
+}
+
+.form__label--cat {
+  margin-left: 50px;
+}
+
+.form-check-input {
+  margin-right: 10px;
+}
+
+.search__button--container {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+#petName,
+#height,
+#weight {
+  display: flex;
+  width: 50%;
+}
+
+.form__container--group {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.params__container{
+  width: 50%;
+  margin: auto;
+  padding: 10px;
+}
+
+/********************* Error ***********************************/
+.error__content {
+  color: #721C24;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background: #F8D7DA;
+  border: 1px solid #F5C6CB;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-left: 23px;
+}
+
+/********************* Login ***********************************/
+.button__password {
+  position: relative;
+  left: 90%;
+  bottom: 35px;
+  border: none;
+  background: none;
+}
+
+/********************* Profile Settings ***********************************/
+.form__profileSettings--container {
+  background: cadetblue;
+}
+
+.form__profileSettings {
+  width: 40%;
+  margin-left: 30%;
+  background: peru;
+  padding: 35px;
+}
+
+/********************* Pets ***********************************/
+.button__pet--option {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 25px;
+}
+
+.petCard__button__container {
+  display: grid;
+  width: 50%;
+  margin: auto;
+}
+
+.notPets__container {
+  height: 320px;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.notPets__image {
+  width: 250px;
+}
+
+/********************* Table ***********************************/
+.table__pet:hover {
+  cursor: pointer;
+  background: green;
+}
+
+/********************* Pet Info ***********************************/
+.petInfo__container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 35px;
+  padding-bottom: 25px;
+  padding-top: 25px;
+}
+
+/********************* Contact ***********************************/
+.form__contact{
+  margin: auto;
+}
